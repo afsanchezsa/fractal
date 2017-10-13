@@ -6,30 +6,47 @@
 package proyecto;
 
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.Timer;
 
 /**
  *
  * @author USUARIO
  */
-public class Personaje {
+public class Personaje implements ActionListener {
     protected int x;
     protected int y;
+    private static  final int VELOCIDAD=2;
+    private double vx,vy;
     private BufferedImage ImagenGeneral;
     private HashMap<Integer,Image> ImagenesCorrer;
     private HashMap<Integer,Image>ImagenesSaltar;
     private Image ImagenEstatico;
   private Image Salto;
+  private double t;
+  //private Timer salto;
+  private Thread salto;
+  private Thread sonido;
 public Personaje(String nombre) {
 int indice=0;
 this.ImagenesCorrer=new HashMap<>();
 this.ImagenesSaltar=new HashMap<>();
+this.salto=new Thread(new Salto(this));//new Timer(5000,this);
+this.vx=10;
+this.vy=2;
+this.t=0;
+this.sonido=new Thread(new Sonidos("song.wav"));
+sonido.start();
 try{
 
 this.ImagenGeneral=ImageIO.read(new File("personajes.png"));
@@ -118,7 +135,26 @@ this.Salto=this.ImagenEstatico;
         
     this.y-=20;
     }    
+    public void salto(){
+    this.salto.start();
+ 
+     this.salto=null;
+    this.salto=new Thread(new Salto(this));
+    //this.salto.stop();
+    ;
+    }
+    public void nosaltar(){
+   
     
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
     
     
     
@@ -127,6 +163,28 @@ this.Salto=this.ImagenEstatico;
     Image imagenfinal=imagen.getImage();
     return imagenfinal;
     
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+       
+       if(e.getSource()==this.salto){
+       if(this.y>100){
+        this.vx=VELOCIDAD*Math.cos(Math.toRadians(70));
+       this.vy=VELOCIDAD*Math.sin(Math.toRadians(70));
+       this.x=(int)(this.x+(vx*t));
+       this.y=(int)(this.y+ (vy*t)+((9.8*0.5)*t*t));
+         t+=0.000001;
+           
+       }
+       
+      
+       
+       }
+           
+       
+       
+       
     }
     
 }

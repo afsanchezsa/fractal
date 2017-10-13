@@ -31,7 +31,7 @@ setFocusable(true);
 public void keyPressed(KeyEvent e){
 if(e.getKeyCode()==KeyEvent.VK_SPACE){
     System.out.println("saltando");
-lamina.getRey().saltar(1);
+lamina.getRey().salto();
 }
 
 }

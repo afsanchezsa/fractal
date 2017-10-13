@@ -95,8 +95,10 @@ private class Teclado implements KeyListener{
         @Override
         public void keyPressed(KeyEvent e) {
              if(e.getKeyCode()==KeyEvent.VK_SPACE){
+                 rey.salto();
+                 rey.nosaltar();
              //rey.saltar(1);
-             rey.saltar(1);rey.saltar(2);rey.saltar(3);rey.saltar(4);rey.saltar(5);rey.saltar(6);
+             //rey.saltar(1);rey.saltar(2);rey.saltar(3);rey.saltar(4);rey.saltar(5);rey.saltar(6);
              }
 
         
