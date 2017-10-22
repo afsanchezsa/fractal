@@ -43,15 +43,19 @@ public class EjercicioArchivos {
         ArrayList<Banco>comodin=CargarManagers(bancos);
         bancos.clear();
         bancos=comodin;
+        for(Banco b:bancos){
+            ArrayList<Administrador>admin=b.getManagers();
+            for(Administrador a:admin){
+                System.out.println(a.getName());
+            }
+        }
+        bancos.clear();
         comodin=CargarCuentas(bancos);
         bancos=comodin;
         /*comodin=cargarTransacciones(bancos);
         bancos=comodin;
         */
-        for(Banco b:bancos){
-            System.out.println(b.getName());
-            
-        }
+        
         System.out.println("Bienvenido");
         boolean permanecer = true;
         Scanner entrada = new Scanner(System.in);

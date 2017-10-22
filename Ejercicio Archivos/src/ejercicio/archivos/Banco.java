@@ -246,5 +246,9 @@ String linea;
     public ArrayList<Cuenta> getAccounts() {
         return accounts;
     }
+
+    public ArrayList<Administrador> getManagers() {
+        return managers;
+    }
    
 }
