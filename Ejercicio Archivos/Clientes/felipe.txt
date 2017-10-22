@@ -1,0 +1,4 @@
+Banco: bancolombia
+NombredelCliente: felipe
+Id: 1
+Manager: andres
