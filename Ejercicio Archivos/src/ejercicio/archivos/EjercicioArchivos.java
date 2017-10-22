@@ -36,7 +36,10 @@ public class EjercicioArchivos {
         
          */
           ArrayList<Banco> bancos = new ArrayList<>();        
-        bancos.addAll(CargarBancos());
+        bancos=CargarBancos();
+        for(Banco b:bancos){
+            System.out.println(b.getName());
+        }
         ArrayList<Banco>comodin=CargarManagers(bancos);
         bancos.clear();
         bancos=comodin;
