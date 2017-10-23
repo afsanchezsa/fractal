@@ -266,5 +266,9 @@ String linea;
     public ArrayList<Administrador> getManagers() {
         return managers;
     }
+
+    public void setAccounts(ArrayList<Cuenta> accounts) {
+        this.accounts = accounts;
+    }
    
 }

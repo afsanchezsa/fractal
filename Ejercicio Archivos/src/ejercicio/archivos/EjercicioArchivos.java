@@ -190,7 +190,7 @@ public class EjercicioArchivos {
                     for (Banco b : bancos) {
                        if (b.getName().equalsIgnoreCase(banco)) {
                             try {
-                                System.out.println("sisiisi");
+                                
                                 b.consignar(id, monto);
                             } catch (FileNotFoundException ex) {
                                 System.out.println(ex.getMessage());
@@ -331,28 +331,38 @@ String cadena=null;
    archivointerno=new File("Transaccion/"+s);
        try {
            entrada=new Scanner(archivointerno);
-            while(entrada.hasNextDouble()){
+            while(entrada.hasNext()){
             cadena=entrada.next();
                 if(cadena.equalsIgnoreCase("IdCuenta:")){
                Idcuenta =entrada.nextInt();
                 }
-                entrada.next();
+                //entrada.next();
  monto+=entrada.nextDouble();
    
    }
             
             
             for(Banco b:bancos){
-            
-                for(int i=0;i<b.getAccounts().size();i++){
+            ArrayList<Cuenta>counts=b.getAccounts();
+            ArrayList<Cuenta>fin=new ArrayList<>();
+                /*for(int i=0;i<b.getAccounts().size();i++){
                 if(b.getAccounts().get(i).getId()==Idcuenta){
                 b.getAccounts().get(i).Consignar(monto);
                 
                 
                 }
                 
-                }
-            
+                }*/
+               for(Cuenta c:counts){
+               if(c.getId()==Idcuenta){
+               c.Consignar(monto);
+               fin.add(c);
+               
+               }
+                       
+               
+               }
+            b.setAccounts(fin);
             
             }
        } catch (FileNotFoundException ex) {

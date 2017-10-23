@@ -1,2 +1,3 @@
-ConsignaciondeMonto: 345.0
-ConsignaciondeMonto: 87.0
+IdCuenta: 1
+ConsignaciondeMonto: 234.0
+ConsignaciondeMonto: 234.0
