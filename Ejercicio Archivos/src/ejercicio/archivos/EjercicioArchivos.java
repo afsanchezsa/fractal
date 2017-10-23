@@ -43,18 +43,55 @@ public class EjercicioArchivos {
         ArrayList<Banco>comodin=CargarManagers(bancos);
         bancos.clear();
         bancos=comodin;
+        System.out.println("managers:");
         for(Banco b:bancos){
             ArrayList<Administrador>admin=b.getManagers();
+            
             for(Administrador a:admin){
                 System.out.println(a.getName());
             }
         }
-        bancos.clear();
+        
+        
+        comodin=CargarClientes(bancos);
+        //bancos.clear();
+        bancos=comodin;
+        System.out.println("prueba");
+        for(Banco b:bancos){
+            System.out.println(b.getName());
+        }
+        for(Banco b:bancos){
+            ArrayList<Cliente>clientes=b.getClients();
+            for(Cliente c:clientes){
+                System.out.println("ID "+c.getId()+" Nombre "+c.getName()+" Manager "+c.NombreManager());
+            
+            }
+            
+                    }
+        
         comodin=CargarCuentas(bancos);
+        
         bancos=comodin;
-        /*comodin=cargarTransacciones(bancos);
+        for(Banco b:bancos){
+          ArrayList<Cuenta>cuentas=b.getAccounts();
+            System.out.println("Banco"+b.getName());
+          for(Cuenta c:cuentas){
+              System.out.println("Id Cuenta: "+c.getId()+" propietario: "+c.NombreTitular()+" Credito: "+c.getCredit());
+          
+          }
+        
+        }
+        comodin=cargarTransacciones(bancos);
         bancos=comodin;
-        */
+        for(Banco b:bancos){
+        ArrayList<Cuenta>cuentas=b.getAccounts();
+            System.out.println("Banco"+b.getName());
+          for(Cuenta c:cuentas){
+              System.out.println("Id Cuenta: "+c.getId()+" propietario: "+c.NombreTitular()+" Credito: "+c.getCredit());
+          
+          }
+        
+        }
         
         System.out.println("Bienvenido");
         boolean permanecer = true;
@@ -230,7 +267,7 @@ public class EjercicioArchivos {
         File cuentas=new File("Cuentas");
     File archivointerno;
     Scanner entrada=null;
-    String Banco=null,NombrePropietario;
+    String Banco=null,NombrePropietario,cadena;
     int idcuenta=0,IdTitular=0;
     String archivos[];
     if(cuentas.isDirectory()){
@@ -242,18 +279,19 @@ public class EjercicioArchivos {
         } catch (FileNotFoundException ex) {
             System.out.println(ex.getMessage());
         }
-      while(entrada.hasNextInt()){
-      if(entrada.next().equalsIgnoreCase("Banco:")){
+      while(entrada.hasNext()){
+      cadena=entrada.next();
+      if(cadena.equalsIgnoreCase("Banco:")){
       Banco=entrada.next();
       
-      }if(entrada.next().equalsIgnoreCase("IDCuenta:")){
+      }if(cadena.equalsIgnoreCase("IDCuenta:")){
       idcuenta=entrada.nextInt();
       
-      }if(entrada.next().equalsIgnoreCase("Titular:")){
+      }if(cadena.equalsIgnoreCase("Titular:")){
       NombrePropietario=entrada.next();
       
       }
-      if(entrada.next().equalsIgnoreCase("IdTitular:")){
+      if(cadena.equalsIgnoreCase("IdTitular:")){
       IdTitular=entrada.nextInt();
       
       }
@@ -261,7 +299,7 @@ public class EjercicioArchivos {
       if(b.getName().equalsIgnoreCase(Banco)){
           try {
               b.addCuenta(IdTitular);
-              bank.add(b);
+              
           } catch (IOException ex) {
               System.out.println(ex.getMessage());
           }
@@ -274,7 +312,7 @@ public class EjercicioArchivos {
     }
     
     }
-    return bank;
+    return bancos;
     }
    public static ArrayList<Banco> cargarTransacciones(ArrayList<Banco>bancos){
   double monto=0;
@@ -284,6 +322,8 @@ public class EjercicioArchivos {
    File archivointerno;
    Scanner entrada;
    String archivos[];
+String cadena=null;
+
    File Carpeta=new File("Transaccion");
    if(Carpeta.isDirectory()){
    archivos=Carpeta.list();
@@ -292,18 +332,23 @@ public class EjercicioArchivos {
        try {
            entrada=new Scanner(archivointerno);
             while(entrada.hasNextDouble()){
- entrada.next();
+            cadena=entrada.next();
+                if(cadena.equalsIgnoreCase("IdCuenta:")){
+               Idcuenta =entrada.nextInt();
+                }
+                entrada.next();
  monto+=entrada.nextDouble();
    
    }
-            Idcuenta=Integer.parseInt(s.substring(0, 1));
+            
+            
             for(Banco b:bancos){
             
                 for(int i=0;i<b.getAccounts().size();i++){
                 if(b.getAccounts().get(i).getId()==Idcuenta){
                 b.getAccounts().get(i).Consignar(monto);
                 
-                break;
+                
                 }
                 
                 }
@@ -318,6 +363,68 @@ public class EjercicioArchivos {
    }
    return bancos;
    }
+    public static ArrayList<Banco> CargarClientes(ArrayList<Banco>bancos){
+    ArrayList<Banco>bank=new ArrayList<>();
+    ArrayList<Administrador>managers;
+        File Clientes=new File("Clientes");
+    File archivointerno;
+    Scanner entrada;
+    String archivos[]=null;
+    String Banco=null;
+    String Cliente=null,Manager=null;
+    String cadena;
+    int Id=0,IdManager=0;
+    if(Clientes.isDirectory()){
+    archivos=Clientes.list();
     
+    }
+    for(String s:archivos){
+    archivointerno=new File("Clientes/"+s);
+        try {
+            entrada=new Scanner(archivointerno);
+            while(entrada.hasNext()){
+            cadena=entrada.next();
+                if(cadena.equalsIgnoreCase("Banco:")){
+            Banco=entrada.next();
+            }if(cadena.equalsIgnoreCase("NombredelCliente:")){
+            Cliente=entrada.next();
+            }if(cadena.equalsIgnoreCase("Id:")){
+           Id=entrada.nextInt();
+            }if(cadena.equalsIgnoreCase("Manager:")){
+            Manager=entrada.next();
+            }
+            
+            }
+            for(Banco b:bancos){
+            managers=b.getManagers();
+            for(Administrador a:managers){
+            if(a.getName().equalsIgnoreCase(Manager))
+            IdManager=a.getId();
+            
+             
+            }
+            }
+            for(Banco b:bancos){
+            if(b.getName().equalsIgnoreCase(Banco)){
+                try {
+                    b.addCliente(Cliente,IdManager,Id);
+                    
+                } catch (IOException ex) {
+                   System.out.println(ex.getMessage());
+                }
+            
+            }
+            
+            }
+            
+        } catch (FileNotFoundException ex) {
+            System.out.println(ex.getMessage());
+        }
+    
+    
+    }
+    
+    return bancos;
+    }
 }
 
