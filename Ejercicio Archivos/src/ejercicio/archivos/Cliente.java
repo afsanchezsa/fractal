@@ -25,5 +25,7 @@ private Administrador manager;
       return this.accounts.add(cuenta);
   
   }  
-    
+    public String NombreManager(){
+    return this.manager.getName();
+    }
 }

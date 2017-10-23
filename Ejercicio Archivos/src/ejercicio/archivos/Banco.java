@@ -64,6 +64,7 @@ String linea;
         try {
             consignacion.createNewFile();
          PrintStream salida=new PrintStream(consignacion);
+   salida.println("IdCuenta: "+c.getId());
     salida.println("ConsignaciondeMonto: "+monto);
     salida.flush();
     salida.close();    
@@ -192,7 +193,7 @@ String linea;
     public boolean addManager(String nombre, int Id) throws FileNotFoundException, IOException{
     File manager=new File("Managers/"+nombre+".txt");
     if(manager.exists()){
-       
+        
     }else{
         manager.createNewFile();
     PrintStream salida=new PrintStream(manager);
@@ -233,6 +234,21 @@ String linea;
     
     }
     entrada.close();
+    /*
+    File clientes=new File("Clientes");
+    if(clientes.isDirectory()){
+    archivos=clientes.list();
+    for(String cadena:archivos){
+    archivointerno=new File("Clientes/"+cadena);
+    entrada=new Scanner(archivointerno);
+    while(entrada.hasNext()){
+    if(entrada.next().equalsIgnoreCase("Manager"))
+    
+        
+    }
+    }
+    }*/
+    
     if(this.getName().equalsIgnoreCase(Banco)){
     this.managers.add(new Administrador(Nombre,Id));
     }

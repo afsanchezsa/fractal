@@ -32,5 +32,12 @@ public class Cuenta {
     public int getId() {
         return Id;
     }
-    
+    public String NombreTitular(){
+    return this.owner.getName();
+    }
+
+    public double getCredit() {
+        return credit;
+    }
+
 }
