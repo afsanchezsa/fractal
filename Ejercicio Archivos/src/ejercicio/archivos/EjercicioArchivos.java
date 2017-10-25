@@ -81,7 +81,7 @@ public class EjercicioArchivos {
           }
         
         }
-        comodin=cargarTransacciones(bancos);
+        /*comodin=cargarTransacciones(bancos);
         bancos=comodin;
         for(Banco b:bancos){
         ArrayList<Cuenta>cuentas=b.getAccounts();
@@ -91,7 +91,7 @@ public class EjercicioArchivos {
           
           }
         
-        }
+        }*/
         
         System.out.println("Bienvenido");
         boolean permanecer = true;
@@ -314,7 +314,7 @@ public class EjercicioArchivos {
     }
     return bancos;
     }
-   public static ArrayList<Banco> cargarTransacciones(ArrayList<Banco>bancos){
+   /*public static ArrayList<Banco> cargarTransacciones(ArrayList<Banco>bancos){
   double monto=0;
   int Idcuenta=0;
        ArrayList<Banco>bank=new ArrayList<>();
@@ -353,7 +353,7 @@ String cadena=null;
                 }
                 
                 }*/
-               for(Cuenta c:counts){
+    /*           for(Cuenta c:counts){
                if(c.getId()==Idcuenta){
                c.Consignar(monto);
                fin.add(c);
@@ -372,7 +372,7 @@ String cadena=null;
    }
    }
    return bancos;
-   }
+   }*/
     public static ArrayList<Banco> CargarClientes(ArrayList<Banco>bancos){
     ArrayList<Banco>bank=new ArrayList<>();
     ArrayList<Administrador>managers;
